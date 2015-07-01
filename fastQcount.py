@@ -208,7 +208,9 @@ def main():
         filenames.extend( args.infiles )
 
 
+    hasFile = False
     if len( filenames ) != 0:
+        hasFile = True
         print "FILENAMES:", ", ".join( filenames )
 
         for infile in filenames:
@@ -228,7 +230,7 @@ def main():
 
     data = []
     for filename in filenames:
-        with openfile(filename) as fhd:
+        with openfile(filename) if hasFile else filename as fhd:
             n_line, n_base, chars = stats_fastq(fhd)
 
             try:
@@ -260,7 +262,7 @@ def main():
             data.append( (filename, n_line, n_base, chars) )
 
 
-    if len( filenames ) > 1:
+    if len( filenames ) > 1 or not args.partial:
         n_line_g = sum([d[1] for d in data])
         n_base_g = sum([d[2] for d in data])
         chars_g  = data[0][3]

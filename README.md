@@ -39,7 +39,7 @@ fastQcout.py input.fastq | tee report.txt
 ```
 
 ## pypy
-pypy can speed up the analysis up to 10x
+pypy can speed up the analysis up to 6x
 ```
         pypy 2.2.1 python 2.7.6
 real    0m47.082s  4m28.306s
